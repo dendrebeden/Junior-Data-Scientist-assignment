@@ -1,12 +1,22 @@
 import pandas as pd
 import numpy as np
 
-def execute(input_file, output_file):
-    data = pd.read_csv(input_file, sep = ";")
-    data = data.dropna()
-    del(data["Name"])
-    del(data["Ticket"])
-    del(data["Cabin"])
-    
+def preprocess(input_file, output_file):
+    """Removes 'Name', 'Ticket' and 'Cabin' columns from input file
 
-    data.to_csv(output_file)
+    Args:
+        input_file : string
+            csv input file name with ';' separator
+        output_file : string
+            csv output file name
+    """
+    # Import data from input_file.
+    df = pd.read_csv(input_file, sep = ";")
+    assert(all([item in df.columns for item in ["Name", "Ticket", "Cabin", "PassengerId"]]))
+    df = df.dropna()
+
+    # Drop columns where features are making no sense.
+    df.drop(["Name", "Ticket", "Cabin", "PassengerId"], inplace = True, axis = 1)
+
+    # Export data to output_file.
+    df.to_csv(output_file, index = False)
