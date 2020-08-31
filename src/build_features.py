@@ -31,7 +31,7 @@ def build_features(input_file, output_file):
     # Calculate family size column.
     df["FamilySize"] = df["SibSp"] + df["Parch"] + 1
     # Define alone passengers
-    df["IsAlone"] = df["FamilySize"].apply(lambda x: x == 1 if 1 else 0)
+    df["IsAlone"] = df["FamilySize"].apply(lambda x: 1 if x == 1 else 0)
     
     # Export data to output_file.
     df.to_csv(output_file, index = False)
