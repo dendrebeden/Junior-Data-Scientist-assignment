@@ -9,7 +9,7 @@ preprocess("../data/val.csv", "../data/val_.csv")
 build_features("../data/val_.csv", "../data/val_.csv")
 # Import validation data.
 df = pd.read_csv("../data/val_.csv")
-assert(all([item in df.columns for item in ["Survived", "Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"]]))
+assert(all([item in df.columns for item in ["Survived", "Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked", "IsAlone", "FamilySize"]]))
 
 # Create 'data/model.pkl' file if it does not exist.
 dirname = os.path.dirname("data/model.pkl")
