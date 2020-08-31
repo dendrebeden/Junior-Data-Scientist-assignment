@@ -12,7 +12,6 @@ def preprocess(input_file, output_file):
     """
     # Import data from input_file.
     df = pd.read_csv(input_file, sep = ";")
-    assert(all([item in df.columns for item in ["Name", "Ticket", "Cabin", "PassengerId"]]))
     df = df.dropna()
 
     # Drop columns where features are making no sense.
