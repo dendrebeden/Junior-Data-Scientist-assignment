@@ -3,15 +3,16 @@ import pandas as pd
 import sklearn
 import pickle as pkl
 import os
-from build_features import build_features 
+from build_features import build_features
 from preprocess import preprocess 
 
 # Preprocess and prepare data.
 preprocess("../data/train.csv", "../data/train_.csv")
 build_features("../data/train_.csv", "../data/train_.csv")
+
 # Import training data.
 df = pd.read_csv("../data/train_.csv")
-assert(all([item in df.columns for item in ["Survived", "Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"]]))
+assert(all([item in df.columns for item in ["Survived", "Pclass",  "Age", "SibSp", "Parch", "Fare"]]))
 
 # Create a classifier and select scoring methods.
 from sklearn.ensemble import RandomForestClassifier

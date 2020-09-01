@@ -1,23 +1,27 @@
 import pandas as pd
 import pickle as pkl
+import sklearn
+import os
 from build_features import build_features 
 from sklearn.metrics import classification_report
 from preprocess import preprocess
+from build_features import build_features
+
 
 # Preprocess and prepare data.
 preprocess("../data/val.csv", "../data/val_.csv")
 build_features("../data/val_.csv", "../data/val_.csv")
 # Import validation data.
 df = pd.read_csv("../data/val_.csv")
-assert(all([item in df.columns for item in ["Survived", "Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"]]))
+assert(all([item in df.columns for item in ["Survived", "Pclass", "Age", "SibSp", "Parch", "Fare"]]))
 
 # Create 'data/model.pkl' file if it does not exist.
 dirname = os.path.dirname("data/model.pkl")
 if not os.path.exists(dirname):
     os.makedirs(dirname)
 # Read model from 'data/model.pkl'.
-model_unpickle = open("data/model.pkl", 'rb')
-model = pkl.load(model_unpickle)
+model_pickle = open("data/model.pkl", 'rb')
+model = pkl.load(model_pickle)
 model_pickle.close()
 
 # Predict results.
