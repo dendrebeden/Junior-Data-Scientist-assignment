@@ -27,6 +27,7 @@ def preprocess(input_file, output_file):
 
     # Drop columns where features are making no sense.
     df.drop(["Name", "Ticket", "Cabin", "PassengerId"], inplace = True, axis = 1)
-
+    df.dropna(inplace = True)
+    
     # Export data to output_file.
     df.to_csv(output_file, index = False)
